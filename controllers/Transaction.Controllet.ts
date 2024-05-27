@@ -319,10 +319,7 @@ export const GetMonthlyReport = AsyncErrorHandler(async (req: Request, res: Resp
             if (err) {
                 next(err);
             } else {
-                // Optionally delete the file after sending it
-                fs.unlink(file_path, (unlinkErr) => {
-                    if (unlinkErr) console.error('Error deleting file:', unlinkErr);
-                });
+              
             }
         });
     } catch (error) {
