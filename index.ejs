@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Financial Report</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .income {
+            color: green;
+        }
+
+        .expense {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Monthly Financial Report</h1>
+    <h2><%= month %></h2>
+    <% if (transactions.length > 0) { %>
+    <h3>Budget Amount: <%= transactions[0].budget.amount %></h3>
+    <% } %>
+    <h3>Total Income: <span class="income"><%= totalIncome.toFixed(2) %></span></h3>
+    <h3>Total Expenses: <span class="expense"><%= totalExpenses.toFixed(2) %></span></h3>
+    <h3>Transactions</span></h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% transactions.forEach(transaction => { %>
+            <tr>
+                <td><%= transaction.category.name %></td>
+                <td class="<%= transaction.type.toLowerCase() %>"><%= transaction.type %></td>
+                <td><%= transaction.amount.toFixed(2) %></td>
+                <td><%= new Date(transaction.createdAt).toLocaleDateString() %></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+  
+    <% if (transactions.length > 0) { %>
+    <h4>Budget: <%= transactions[0].budget.amount %></h4>
+    <p>Budget Duration: <%= transactions[0].budget.duration %></p>
+    <p>Budget Amount: <%= transactions[0].budget.amount %></p>
+    <p>Budget Income Amount: <%= transactions[0].budget.addIncomeamount %></p>
+    <p>Budget Remain Amount: <%= transactions[0].budget.remainAmount %></p>
+    <p>Budget Spent Amount: <%= transactions[0].budget.spentAmount %></p>
+    <p>Budget Start Date: <%= new Date(transactions[0].budget.createdAt).toLocaleDateString() %></p>
+    <% } %>
+</body>
+
+</html>
