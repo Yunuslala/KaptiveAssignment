@@ -13,7 +13,7 @@ export const Authentication = AsyncErrorHandler(
 
     if (token) {
       try {
-        const decoded = jwt.verify(token, process.env.SECRET as string) as JwtPayload;
+        const decoded = jwt.verify(token, process.env.secret as string) as JwtPayload;
 
         if (decoded) {
           req.body.UserId = decoded.UserId
